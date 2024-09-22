@@ -1,0 +1,27 @@
+<div class="container">
+  <h1 class="title">Word Search</h1> 
+  <div class="file-upload-section">
+    <label for="file-upload" class="file-label">
+      <i class="fas fa-upload"></i> Upload a file
+    </label>
+    <input type="file" id="file-upload" (change)="onFileSelected($event)" class="file-input">                        
+    <div *ngIf="fileUploaded" class="upload-success">
+      <i class="fas fa-check-circle"></i> File uploaded successfully!
+    </div>
+  </div>
+  <div *ngIf="fileUploaded" class="search-section">
+   <label for="search-query"><b>Enter the Word</b></label>
+    <div class="search-bar">
+      <input type="text" id="search-query" [(ngModel)]="searchQuery"class="search-input">
+      <button (click)="search()" class="search-button">Search</button>
+    </div>
+    <div *ngIf="searchword" class="search-message"><b>{{ searchword }}</b></div>
+    <div *ngIf="filteredContent.length > 0" class="results">
+      <div *ngFor="let line of filteredContent" [innerHTML]="line" class="result-line"></div>
+      <div class="navigation-buttons">
+        <button *ngIf="buttonVisible" [disabled]="isPreviousDisabled" (click)="previousHighlight()" class="nav-button"><b> < </b></button>
+        <button *ngIf="buttonVisible" [disabled]="isNextDisabled" (click)="nextHighlight()" class="nav-button"><b> > </b></button>
+      </div>
+    </div>
+  </div>
+</div>
